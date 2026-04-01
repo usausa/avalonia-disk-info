@@ -4,17 +4,8 @@ using DiskInfo.Models;
 
 using MacDotNet.Disk;
 
-using Microsoft.Extensions.Logging;
-
-public sealed partial class MacDiskInfoProvider : IDiskInfoProvider
+public sealed class MacDiskInfoProvider : IDiskInfoProvider
 {
-    private readonly ILogger<MacDiskInfoProvider> logger;
-
-    public MacDiskInfoProvider(ILogger<MacDiskInfoProvider> logger)
-    {
-        this.logger = logger;
-    }
-
     public IReadOnlyList<DiskDisplayInfo> GetDisks()
     {
         var disks = new List<DiskDisplayInfo>();
@@ -29,17 +20,14 @@ public sealed partial class MacDiskInfoProvider : IDiskInfoProvider
                     disks.Add(displayInfo);
                 }
             }
-            catch (IOException ex)
+            catch (IOException)
             {
-                LogReadFailure(logger, ex, disk.DeviceName);
             }
-            catch (InvalidOperationException ex)
+            catch (InvalidOperationException)
             {
-                LogReadFailure(logger, ex, disk.DeviceName);
             }
-            catch (UnauthorizedAccessException ex)
+            catch (UnauthorizedAccessException)
             {
-                LogReadFailure(logger, ex, disk.DeviceName);
             }
         }
 
@@ -136,7 +124,4 @@ public sealed partial class MacDiskInfoProvider : IDiskInfoProvider
             powerOnHours,
             smartValues);
     }
-
-    [LoggerMessage(LogLevel.Warning, "Failed to read SMART information for disk. DeviceName=[{deviceName}].")]
-    private static partial void LogReadFailure(ILogger logger, Exception exception, string? deviceName);
 }

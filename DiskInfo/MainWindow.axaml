@@ -17,14 +17,7 @@
         Icon="/Assets/avalonia-logo.ico">
 
     <Grid>
-        <TextBlock HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    IsVisible="{Binding HasNoDisks}"
-                    Text="No disk with SMART information was found."
-                    TextAlignment="Center" />
-
-        <TabControl IsVisible="{Binding HasDisks}"
-                    ItemsSource="{Binding Disks}">
+        <TabControl ItemsSource="{Binding Disks}">
             <TabControl.ItemTemplate>
                 <DataTemplate x:DataType="model:DiskDisplayInfo">
                     <Grid RowDefinitions="Auto,Auto">

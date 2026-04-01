@@ -4,17 +4,8 @@ using DiskInfo.Models;
 
 using HardwareInfo.Disk;
 
-using Microsoft.Extensions.Logging;
-
-public sealed partial class WindowsDiskInfoProvider : IDiskInfoProvider
+public sealed class WindowsDiskInfoProvider : IDiskInfoProvider
 {
-    private readonly ILogger<WindowsDiskInfoProvider> logger;
-
-    public WindowsDiskInfoProvider(ILogger<WindowsDiskInfoProvider> logger)
-    {
-        this.logger = logger;
-    }
-
     public IReadOnlyList<DiskDisplayInfo> GetDisks()
     {
         var disks = new List<DiskDisplayInfo>();
@@ -29,21 +20,17 @@ public sealed partial class WindowsDiskInfoProvider : IDiskInfoProvider
                     disks.Add(displayInfo);
                 }
             }
-            catch (IOException ex)
+            catch (IOException)
             {
-                LogReadFailure(logger, ex, disk.DeviceId);
             }
-            catch (InvalidOperationException ex)
+            catch (InvalidOperationException)
             {
-                LogReadFailure(logger, ex, disk.DeviceId);
             }
-            catch (UnauthorizedAccessException ex)
+            catch (UnauthorizedAccessException)
             {
-                LogReadFailure(logger, ex, disk.DeviceId);
             }
-            catch (Win32Exception ex)
+            catch (Win32Exception)
             {
-                LogReadFailure(logger, ex, disk.DeviceId);
             }
         }
 
@@ -146,7 +133,4 @@ public sealed partial class WindowsDiskInfoProvider : IDiskInfoProvider
             powerOnHours,
             smartValues);
     }
-
-    [LoggerMessage(LogLevel.Warning, "Failed to read SMART information for disk. DeviceId=[{deviceId}].")]
-    private static partial void LogReadFailure(ILogger logger, Exception exception, string? deviceId);
 }
