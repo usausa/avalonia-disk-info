@@ -3,9 +3,9 @@
 Multi-platform S.M.A.R.T information display tool built with Avalonia UI.
 
 <p>
-<img width="33%" src="Document/windows.png" />
-<img width="33%" src="Document/linux.png" />
-<img width="33%" src="Document/mac.png" />
+<img width="30%" src="Document/windows.png" />
+<img width="30%" src="Document/linux.png" />
+<img width="30%" src="Document/mac.png" />
 </p>
 
 ## Reference
