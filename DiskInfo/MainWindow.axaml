@@ -4,14 +4,148 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:s="http://smart/avalonia"
         xmlns:app="using:DiskInfo"
+        xmlns:model="using:DiskInfo.Models"
         mc:Ignorable="d"
         x:Class="DiskInfo.MainWindow"
         x:DataType="app:MainWindowViewModel"
         s:DataContextResolver.Type="app:MainWindowViewModel"
-        Width="800" Height="600"
-        d:DesignWidth="800" d:DesignHeight="600"
-        CanResize="True"
+        Width="640" Height="640"
+        MinWidth="640" MinHeight="640"
+        d:DesignWidth="640" d:DesignHeight="640"
+        CanResize="False"
         Title="DiskInfo"
         Icon="/Assets/avalonia-logo.ico">
 
+    <Grid>
+        <TextBlock HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    IsVisible="{Binding HasNoDisks}"
+                    Text="No disk with SMART information was found."
+                    TextAlignment="Center" />
+
+        <TabControl IsVisible="{Binding HasDisks}"
+                    ItemsSource="{Binding Disks}">
+            <TabControl.ItemTemplate>
+                <DataTemplate x:DataType="model:DiskDisplayInfo">
+                    <Grid RowDefinitions="Auto,Auto">
+                        <TextBlock HorizontalAlignment="Center"
+                                   FontSize="14"
+                                   Text="{Binding Temperature, TargetNullValue='-', StringFormat={}{0} ℃}" />
+                        <TextBlock Grid.Row="1"
+                                   HorizontalAlignment="Center"
+                                   FontSize="14"
+                                   Text="{Binding TabTitle, TargetNullValue='-'}" />
+                    </Grid>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+
+            <TabControl.ContentTemplate>
+                <DataTemplate x:DataType="model:DiskDisplayInfo">
+                    <Grid RowDefinitions="Auto,Auto,*">
+                        <TextBlock Grid.Row="0"
+                                   HorizontalAlignment="Center"
+                                   FontSize="24"
+                                   Text="{Binding Model, TargetNullValue='-'}"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap" />
+
+                        <Grid Grid.Row="1"
+                              ColumnDefinitions="4*,*,4*,4*,*,4*,4*"
+                              RowDefinitions="Auto,Auto,Auto,Auto"
+                              RowSpacing="8">
+                            <TextBlock Grid.Row="0"
+                                        Grid.Column="0"
+                                        Text="Health" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="0"
+                                       Text="{Binding Health, TargetNullValue='-', StringFormat={}{0} %}" />
+                            <TextBlock Grid.Row="2"
+                                       Grid.Column="0"
+                                       Text="Temperature" />
+                            <TextBlock Grid.Row="3"
+                                       Grid.Column="0"
+                                       Text="{Binding Temperature, TargetNullValue='-', StringFormat={}{0} ℃}" />
+
+                            <TextBlock Grid.Row="0"
+                                       Grid.Column="2"
+                                       Text="Firmware" />
+                            <TextBlock Grid.Row="0"
+                                       Grid.Column="3"
+                                       Text="{Binding FirmwareRevision, TargetNullValue='-'}"
+                                       TextWrapping="Wrap" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="2"
+                                       Text="BusType" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="3"
+                                       Text="{Binding BusType, TargetNullValue='-'}"
+                                       TextWrapping="Wrap" />
+                            <TextBlock Grid.Row="2"
+                                       Grid.Column="2"
+                                       Text="Location" />
+                            <TextBlock Grid.Row="2"
+                                       Grid.Column="3"
+                                       Text="{Binding Location, TargetNullValue='-'}"
+                                       TextWrapping="Wrap" />
+                            <TextBlock Grid.Row="3"
+                                       Grid.Column="2"
+                                       Text="Size" />
+                            <TextBlock Grid.Row="3"
+                                       Grid.Column="3"
+                                       Text="{Binding Size}" />
+
+                            <TextBlock Grid.Row="0"
+                                       Grid.Column="5"
+                                       Text="DataRead" />
+                            <TextBlock Grid.Row="0"
+                                       Grid.Column="6"
+                                       Text="{Binding DataReadGigaBytes, TargetNullValue='-', StringFormat={}{0} GB}" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="5"
+                                       Text="DataWrite" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="6"
+                                       Text="{Binding DataWriteGigaBytes, TargetNullValue='-', StringFormat={}{0} GB}" />
+                            <TextBlock Grid.Row="2"
+                                       Grid.Column="5"
+                                       Text="PowerCycles" />
+                            <TextBlock Grid.Row="2"
+                                       Grid.Column="6"
+                                       Text="{Binding PowerCycles}" />
+                            <TextBlock Grid.Row="3"
+                                       Grid.Column="5"
+                                       Text="PowerOnHours" />
+                            <TextBlock Grid.Row="3"
+                                       Grid.Column="6"
+                                       Text="{Binding PowerOnHours}" />
+                        </Grid>
+
+                        <DataGrid Grid.Row="2"
+                                  AutoGenerateColumns="False"
+                                  BorderBrush="{DynamicResource GrayLighten2}"
+                                  BorderThickness="1"
+                                  CanUserReorderColumns="False"
+                                  CanUserResizeColumns="False"
+                                  CanUserSortColumns="False"
+                                  GridLinesVisibility="All"
+                                  HeadersVisibility="Column"
+                                  IsReadOnly="True"
+                                  ItemsSource="{Binding SmartValues}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Id, StringFormat={}{0:X2}}"
+                                                    Header="Id"
+                                                    Width="56" />
+                                <DataGridTextColumn Binding="{Binding Name, TargetNullValue='-'}"
+                                                    Header="Name"
+                                                    Width="360" />
+                                <DataGridTextColumn Binding="{Binding RawValue, StringFormat={}{0:X14}}"
+                                                    Header="RawValue"
+                                                    Width="180" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
+    </Grid>
 </Window>

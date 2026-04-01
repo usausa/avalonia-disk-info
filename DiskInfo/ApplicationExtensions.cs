@@ -2,6 +2,7 @@ namespace DiskInfo;
 
 using System.Runtime.InteropServices;
 
+using DiskInfo.Services;
 using DiskInfo.Settings;
 
 using Microsoft.Extensions.Configuration;
@@ -37,6 +38,8 @@ public static class ApplicationExtensions
     public static HostApplicationBuilder ConfigureComponents(this HostApplicationBuilder builder)
     {
         builder.Services.AddAvaloniaServices();
+        builder.Services.AddSingleton<IDiskInfoProvider>(static serviceProvider => CreateDiskInfoProvider(serviceProvider));
+        builder.Services.AddSingleton<MainWindowViewModel>();
 
         builder.ConfigureContainer(new SmartServiceProviderFactory(), x => ConfigureContainer(builder.Configuration, x));
 
@@ -58,6 +61,26 @@ public static class ApplicationExtensions
 
         // Window
         config.BindSingleton<MainWindow>();
+    }
+
+    private static IDiskInfoProvider CreateDiskInfoProvider(IServiceProvider serviceProvider)
+    {
+        if (OperatingSystem.IsWindows())
+        {
+            return ActivatorUtilities.CreateInstance<WindowsDiskInfoProvider>(serviceProvider);
+        }
+
+        if (OperatingSystem.IsLinux())
+        {
+            return ActivatorUtilities.CreateInstance<LinuxDiskInfoProvider>(serviceProvider);
+        }
+
+        if (OperatingSystem.IsMacOS())
+        {
+            return ActivatorUtilities.CreateInstance<MacDiskInfoProvider>(serviceProvider);
+        }
+
+        throw new PlatformNotSupportedException();
     }
 
     //--------------------------------------------------------------------------------
