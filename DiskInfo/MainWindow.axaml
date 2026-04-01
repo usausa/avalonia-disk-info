@@ -16,7 +16,7 @@
         Title="DiskInfo"
         Icon="/Assets/avalonia-logo.ico">
 
-    <Grid>
+    <Grid Background="White">
         <TabControl ItemsSource="{Binding Disks}">
             <TabControl.ItemTemplate>
                 <DataTemplate x:DataType="model:DiskData">
