@@ -32,12 +32,9 @@ global using Smart.Collections.Generic;
 global using Smart.ComponentModel;
 global using Smart.Mvvm;
 global using Smart.Mvvm.Messaging;
-global using Smart.Navigation;
-global using Smart.Navigation.Attributes;
-global using Smart.Navigation.Plugins.Parameter;
-global using Smart.Navigation.Plugins.Scope;
 global using Smart.Text;
 
+// TODO
 //global using DiskInfo;
 //global using DiskInfo.Domain;
 //global using DiskInfo.Messaging;
