@@ -1,22 +1,22 @@
 namespace DiskInfo.Models;
 
-public sealed class DiskDisplayInfo
+public sealed class DiskData
 {
-    public string? TabTitle { get; }
+    public string? Name { get; }
+
+    public string? BusType { get; }
 
     public string? Model { get; }
+
+    public string? FirmwareRevision { get; }
+
+    public ulong Size { get; }
+
+    public string? Location { get; }
 
     public int? Health { get; }
 
     public int? Temperature { get; }
-
-    public string? FirmwareRevision { get; }
-
-    public string? BusType { get; }
-
-    public string? Location { get; }
-
-    public ulong Size { get; }
 
     public ulong? DataReadGigaBytes { get; }
 
@@ -26,31 +26,31 @@ public sealed class DiskDisplayInfo
 
     public ulong PowerOnHours { get; }
 
-    public IReadOnlyList<SmartValueDisplayInfo> SmartValues { get; }
+    public IReadOnlyList<SmartValueData> SmartValues { get; }
 
-    public DiskDisplayInfo(
-        string? tabTitle,
+    public DiskData(
+        string? name,
+        string? busType,
         string? model,
+        string? firmwareRevision,
+        ulong size,
+        string? location,
         int? health,
         int? temperature,
-        string? firmwareRevision,
-        string? busType,
-        string? location,
-        ulong size,
         ulong? dataReadGigaBytes,
         ulong? dataWriteGigaBytes,
         ulong powerCycles,
         ulong powerOnHours,
-        IReadOnlyList<SmartValueDisplayInfo> smartValues)
+        IReadOnlyList<SmartValueData> smartValues)
     {
-        TabTitle = tabTitle;
+        Name = name;
+        BusType = busType;
         Model = model;
+        FirmwareRevision = firmwareRevision;
+        Size = size;
+        Location = location;
         Health = health;
         Temperature = temperature;
-        FirmwareRevision = firmwareRevision;
-        BusType = busType;
-        Location = location;
-        Size = size;
         DataReadGigaBytes = dataReadGigaBytes;
         DataWriteGigaBytes = dataWriteGigaBytes;
         PowerCycles = powerCycles;

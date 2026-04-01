@@ -1,6 +1,6 @@
 namespace DiskInfo.Models;
 
-public sealed class SmartValueDisplayInfo
+public sealed class SmartValueData
 {
     public int Id { get; }
 
@@ -8,7 +8,7 @@ public sealed class SmartValueDisplayInfo
 
     public ulong RawValue { get; }
 
-    public SmartValueDisplayInfo(int id, string? name, ulong rawValue)
+    public SmartValueData(int id, string? name, ulong rawValue)
     {
         Id = id;
         Name = name;

@@ -4,5 +4,5 @@ using DiskInfo.Models;
 
 public interface IDiskInfoProvider
 {
-    IReadOnlyList<DiskDisplayInfo> GetDisks();
+    IReadOnlyList<DiskData> GetDisks();
 }

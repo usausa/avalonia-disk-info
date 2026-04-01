@@ -19,7 +19,7 @@
     <Grid>
         <TabControl ItemsSource="{Binding Disks}">
             <TabControl.ItemTemplate>
-                <DataTemplate x:DataType="model:DiskDisplayInfo">
+                <DataTemplate x:DataType="model:DiskData">
                     <Grid RowDefinitions="Auto,Auto">
                         <TextBlock HorizontalAlignment="Center"
                                    FontSize="14"
@@ -27,13 +27,13 @@
                         <TextBlock Grid.Row="1"
                                    HorizontalAlignment="Center"
                                    FontSize="14"
-                                   Text="{Binding TabTitle, TargetNullValue='-'}" />
+                                   Text="{Binding Name, TargetNullValue='-'}" />
                     </Grid>
                 </DataTemplate>
             </TabControl.ItemTemplate>
 
             <TabControl.ContentTemplate>
-                <DataTemplate x:DataType="model:DiskDisplayInfo">
+                <DataTemplate x:DataType="model:DiskData">
                     <Grid RowDefinitions="Auto,Auto,*">
                         <TextBlock Grid.Row="0"
                                    HorizontalAlignment="Center"

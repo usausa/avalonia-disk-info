@@ -5,10 +5,10 @@ using DiskInfo.Services;
 
 public sealed class MainWindowViewModel
 {
-    public ObservableCollection<DiskDisplayInfo> Disks { get; }
+    public ObservableCollection<DiskData> Disks { get; }
 
     public MainWindowViewModel(IDiskInfoProvider provider)
     {
-        Disks = new ObservableCollection<DiskDisplayInfo>(provider.GetDisks());
+        Disks = new ObservableCollection<DiskData>(provider.GetDisks());
     }
 }
