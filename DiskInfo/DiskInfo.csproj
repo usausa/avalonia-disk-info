@@ -39,6 +39,9 @@
     </PackageReference>
     <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.13" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.13" />
+    <PackageReference Include="HardwareInfo.Disk" Version="1.7.0" />
+    <PackageReference Include="LinuxDotNet.Disk" Version="1.9.1" />
+    <PackageReference Include="MacDotNet.Disk" Version="1.2.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.5" />
     <PackageReference Include="Serilog.Enrichers.Thread" Version="4.0.0" />
     <PackageReference Include="Serilog.Extensions.Hosting" Version="10.0.0" />
