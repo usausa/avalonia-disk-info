@@ -9,6 +9,8 @@ public sealed class MainWindowViewModel
 
     public MainWindowViewModel(IDiskInfoProvider provider)
     {
+#pragma warning disable IDE0028
         Disks = new ObservableCollection<DiskData>(provider.GetDisks());
+#pragma warning restore IDE0028
     }
 }
