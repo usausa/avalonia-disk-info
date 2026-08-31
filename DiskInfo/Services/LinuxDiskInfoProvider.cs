@@ -21,7 +21,7 @@ public sealed class LinuxDiskInfoProvider : IDiskInfoProvider
             var powerCycles = 0ul;
             var powerOnHours = 0ul;
 
-            if (disk.SmartType == SmartType.Nvme && disk.Smart is ISmartNvme nvme)
+            if ((disk.SmartType == SmartType.Nvme) && (disk.Smart is ISmartNvme nvme))
             {
                 health = 100 - nvme.PercentageUsed;
                 temperature = nvme.Temperature;
@@ -46,7 +46,7 @@ public sealed class LinuxDiskInfoProvider : IDiskInfoProvider
                 smartValues.Add(new SmartValueData(14, nameof(nvme.MediaErrors), nvme.MediaErrors));
                 smartValues.Add(new SmartValueData(15, nameof(nvme.ErrorInfoLogEntries), nvme.ErrorInfoLogEntries));
             }
-            else if (disk.SmartType == SmartType.Generic && disk.Smart is ISmartGeneric generic)
+            else if ((disk.SmartType == SmartType.Generic) && (disk.Smart is ISmartGeneric generic))
             {
                 foreach (var id in generic.GetSupportedIds())
                 {
