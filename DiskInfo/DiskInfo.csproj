@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net10.0</TargetFrameworks>
+    <TargetFrameworks>net11.0</TargetFrameworks>
     <OutputType>WinExe</OutputType>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -14,33 +14,34 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="12.0.3" />
-    <PackageReference Include="Avalonia.Controls.DataGrid" Version="12.0.0" />
-    <PackageReference Include="Avalonia.Desktop" Version="12.0.3" />
-    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-    <PackageReference Include="Avalonia.Diagnostics" Version="11.3.16">
+    <PackageReference Include="Avalonia" Version="12.1.6" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="12.1.2" />
+    <PackageReference Include="Avalonia.Desktop" Version="12.1.6" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="12.1.6" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="12.1.6" />
+    <PackageReference Include="AvaloniaUI.DiagnosticsSupport" Version="2.2.3">
       <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>none</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Avalonia.Fonts.Inter" Version="12.0.3" />
-    <PackageReference Include="Avalonia.Themes.Fluent" Version="12.0.3" />
-    <PackageReference Include="HardwareInfo.Disk" Version="1.9.1" />
-    <PackageReference Include="LinuxDotNet.Disk" Version="1.11.0" />
-    <PackageReference Include="MacDotNet.Disk" Version="1.5.0" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.8" />
-    <PackageReference Include="System.Reactive" Version="6.1.0" />
-    <PackageReference Include="Usa.Smart.Avalonia" Version="2.16.0" />
-    <PackageReference Include="Usa.Smart.Avalonia.Extensions" Version="2.16.0" />
-    <PackageReference Include="Usa.Smart.Core" Version="2.9.0" />
-    <PackageReference Include="Usa.Smart.Mvvm" Version="2.2.0" />
-    <PackageReference Include="Usa.Smart.Reactive" Version="2.9.0" />
-    <PackageReference Include="Usa.Smart.Resolver" Version="2.10.0" />
-    <PackageReference Include="Usa.Smart.Resolver.Extensions.DependencyInjection" Version="2.10.0" />
-    <PackageReference Include="Xaml.Behaviors.Avalonia" Version="12.0.0.1" />
+    <PackageReference Include="HardwareInfo.Disk" Version="2.0.0" />
+    <PackageReference Include="LinuxDotNet.Disk" Version="3.0.0" />
+    <PackageReference Include="MacDotNet.Disk" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="11.0.0" />
+    <PackageReference Include="System.Reactive" Version="7.0.0" />
+    <PackageReference Include="Usa.Smart.Avalonia" Version="3.0.0" />
+    <PackageReference Include="Usa.Smart.Avalonia.Extensions" Version="3.0.0" />
+    <PackageReference Include="Usa.Smart.Core" Version="3.0.0" />
+    <PackageReference Include="Usa.Smart.Mvvm" Version="3.0.0" />
+    <PackageReference Include="Usa.Smart.Reactive" Version="3.0.0" />
+    <PackageReference Include="Usa.Smart.Resolver" Version="3.3.0" />
+    <PackageReference Include="Usa.Smart.Resolver.Extensions.DependencyInjection" Version="3.3.0" />
+    <PackageReference Include="Xaml.Behaviors.Avalonia" Version="12.1.5" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="Usa.Smart.Analyzers.JapaneseComment" Version="1.6.0" />
+    <PackageReference Update="Usa.Smart.Analyzers.JapaneseComment" Version="2.0.0" />
   </ItemGroup>
 
 </Project>
